@@ -1,0 +1,4 @@
+node_modules
+info_src
+*.http
+.env
