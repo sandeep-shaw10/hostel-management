@@ -76,7 +76,7 @@ const studentValidation = (data) => {
         branch: Joi.string().valid(...Object.values(BRANCH)).required(),
         join_date: Joi.date(),
         end_date: Joi.date(),
-        status: Joi.number().min(0).max(1).required(),
+        status: Joi.string().required(),    //Changed from number to string
         fee: Joi.array().items(Joi.object({
             date: Joi.date(),
             amount: Joi.number().required()

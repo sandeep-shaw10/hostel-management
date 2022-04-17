@@ -44,7 +44,9 @@ router.post('/add/:blockId', verify, blockResolve, async(req, res) => {
             await room.save()
             res.send({ room: room._id })
         }catch(err){
-            res.status(400).send(err.message)
+            res.status(400).send({
+                'error': err.message
+            })
         }
 })
 
@@ -54,7 +56,9 @@ router.get('/delete/:roomId', verify, blockResolve, roomResolve, async(req, res)
         const room = await Room.findOneAndDelete({ _id: req.params.roomId })
         res.send(room)
     }catch(err){
-        res.status(400).send(err.message)
+        res.status(400).send({
+            "error": err.message
+        })
     }
 })
 

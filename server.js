@@ -1,6 +1,7 @@
 // Import dependency
 require('dotenv').config()
 const express = require('express')
+const cors = require('cors');
 const { mongoose } = require('mongoose')
 const authRoute = require('./routes/auth')
 const blockRoute = require('./routes/block')
@@ -13,7 +14,7 @@ const feeRoute = require('./routes/fee')
 
 //Variable
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 8000
 
 
 //connect to db
@@ -24,6 +25,8 @@ mongoose.connect( process.env.DB_CONNECT, () => {
 
 // Body Parser middleware
 app.use(express.json());
+app.use(cors());
+app.use(logger)
 
 
 //api-route
@@ -40,3 +43,9 @@ app.use('/api/fee', feeRoute)
 app.listen(port, () => {
     console.log(`Server running on port ${port}`)
 })
+
+
+function logger(req, res, next){
+    console.log(`${Date.now()} ${req.method}: http://localhost:${port}${req.originalUrl}`)
+    next()
+}

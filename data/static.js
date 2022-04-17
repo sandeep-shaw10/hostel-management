@@ -71,5 +71,13 @@ module.exports = {
     COURSE: COURSE,
     BRANCH: BRANCH,
     BLOCK: BLOCK,
-    FEE: FEE
+    FEE: FEE,
+    ALL:{
+        "role": ROLE,
+        "gender": GENDER,
+        "course": COURSE,
+        "branch": BRANCH,
+        "block": BLOCK,
+        "fee": FEE
+    }
 }

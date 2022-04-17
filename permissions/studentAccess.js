@@ -14,9 +14,9 @@ const checkStudentExist = async(req, res, next) => {
 const studentAlloted = async(req, res, next) => {
     try{
         req.student_alloted = false
-        if(req.student_exist){
+        if(req.student_exist && req.student_exist.length > 0){
             const data = await Room.findOne({ status: [req.params.studentId]})
-            if(data){ req.student_alloted = data._id }
+            if(data){ req.student_alloted = data._id.toString()}
         }
     }catch(err){ next() }
     next()

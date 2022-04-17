@@ -56,9 +56,7 @@ const studentSchema = new mongoose.Schema({
     },
 
     status:{
-        type: Number,
-        min: 0,
-        max: 1,
+        type: String,
         required: true
     },
 

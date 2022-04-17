@@ -5,7 +5,9 @@ const User = require('../model/User')
 const { registerValidation, loginValidation, adminUpdateValidation, staffUpdateValidation } = require('../validation')
 const verify = require('../middleware/verifyToken')
 const authAccess = require('../permissions/authAccess')
-const { ROLE } = require('../data/static')
+const { ROLE, ALL } = require('../data/static')
+const Student = require('../model/Student')
+const Room = require('../model/Room')
 
 
 //Admin: View all Staff
@@ -24,11 +26,11 @@ router.post('/register', verify, authAccess(ROLE.ADMIN), async (req, res) => {
 
     //Validation
     const { error } = registerValidation(req.body)
-    if(error) return res.status(400).send(error.details[0].message)
+    if(error) return res.status(400).send({'error':`${error.details[0].message}`})
 
     //Check mail exist
     const checkEmail = await User.findOne({ email: req.body.email })
-    if(checkEmail) return res.status(400).send('Email already exists')
+    if(checkEmail) return res.status(400).send({'error':'Email already exists'})
 
     //Hash Password
     const salt = await bcrypt.genSalt(10)
@@ -53,6 +55,32 @@ router.post('/register', verify, authAccess(ROLE.ADMIN), async (req, res) => {
 
 
 // lOGIN staff
+// router.post('/login', async (req, res) => {
+
+//     //Validation
+//     const { error } = loginValidation(req.body)
+//     if(error) return res.status(400).send(error.details[0].message)
+
+//     //Check mail exist
+//     const user = await User.findOne({ email: req.body.email })
+//     if(!user) return res.status(400).send('Wrong credentials')
+
+//     //Check password
+//     const checkPassword = await bcrypt.compare(req.body.password, user.password)
+//     if(!checkPassword) return res.status(400).send('Wrong credentials: Password')
+
+//     //Assign Token
+//     const token = jwt.sign({ _id: user._id}, process.env.JWT_TOKEN, { expiresIn: (60*60) })
+//     res.header('auth-token', token).send({
+//         'token': token,
+//         'role': user.role,
+//         'name': user.name,
+//         'email': user.email,
+//         'block': user.block
+//     })
+// })
+
+
 router.post('/login', async (req, res) => {
 
     //Validation
@@ -69,7 +97,29 @@ router.post('/login', async (req, res) => {
 
     //Assign Token
     const token = jwt.sign({ _id: user._id}, process.env.JWT_TOKEN, { expiresIn: (60*60) })
-    res.header('auth-token', token).send(token)
+    const student = await Student.find()
+    const block_access = user.block
+    let room = []
+    let staff = null
+
+    if(user.role === ROLE.ADMIN){
+        staff = await User.find()
+        room = await Room.find()
+    }else{
+        if(block_access){
+            room = await Room.find({ block: { $all: block_access } })
+        }
+    }
+
+    res.header('auth-token', token).send({
+        'token': token,
+        'static': ALL,
+        'student': student,
+        'room': room,
+        'staff': staff,
+        'self': user,
+        'block_access': block_access
+    })
 })
 
 
@@ -79,7 +129,7 @@ router.get('/my-data', verify, async (req, res) => {
         const user = await User.findOne({ _id: req.user})
         res.send(user)
     }catch(err){
-        res.status(400).send(err.message)
+        res.status(400).send({'error': err.message})
     }
 })
 
@@ -99,13 +149,13 @@ router.get('/data/:userId', verify, authAccess(ROLE.ADMIN), async(req, res) => {
 router.get('/delete/:userId', verify, authAccess(ROLE.ADMIN), async(req, res) => {
     try{
         if(req.user._id === req.params.userId){
-            res.status(401).send('Admin cannot delete own record')
+            res.status(401).send({'error':'Admin cannot delete own record'})
         }else{
             const user = await User.findOneAndDelete({ _id: req.params.userId })
             res.send(user)
         }
     }catch(err){
-        res.status(400).send('Not exist')
+        res.status(400).send({'error':'Not exist'})
     }
 })
 
