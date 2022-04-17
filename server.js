@@ -26,7 +26,7 @@ mongoose.connect( process.env.DB_CONNECT, () => {
 // Body Parser middleware
 app.use(express.json());
 app.use(cors());
-app.use(logger)
+// app.use(logger)
 
 
 //api-route
