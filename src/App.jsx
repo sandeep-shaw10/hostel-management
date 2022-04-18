@@ -39,11 +39,11 @@ function App() {
 
   return (
     <div className="App">
-        <Router>
+        <Router basename="hostel-management" >
           <Navbar state={state} />
 
           <div className='content'>
-            <Routes>
+            <Routes >
               <Route exact path="/" element={<Home/>} />
 
               <Route path="/login" element={<ProtectedRoute status='loggedOut' state={state} apiLink={apiLink} />} >
