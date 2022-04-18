@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/hostel-management/static/css/main.df00aa71.css",
+    "main.js": "/hostel-management/static/js/main.7ec46ae6.js",
+    "index.html": "/hostel-management/index.html",
+    "main.df00aa71.css.map": "/hostel-management/static/css/main.df00aa71.css.map",
+    "main.7ec46ae6.js.map": "/hostel-management/static/js/main.7ec46ae6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.df00aa71.css",
+    "static/js/main.7ec46ae6.js"
+  ]
+}
