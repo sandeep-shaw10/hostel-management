@@ -4,6 +4,7 @@ const { ROLE, BLOCK, GENDER, COURSE, BRANCH } = require('./data/static')
 
 // Register Validation: models/User
 const registerValidation = (data) => {
+    let block_id = BLOCK.map((x) => x.id)
     const schema = Joi.object({
         name: Joi.string().min(8).max(256).required(),
         email: Joi.string().min(8).max(256).required().email(),
