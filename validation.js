@@ -9,6 +9,7 @@ const registerValidation = (data) => {
         email: Joi.string().min(8).max(256).required().email(),
         role: Joi.string().valid(...Object.values(ROLE)),
         password: Joi.string().min(8).max(64).required(),
+        block: Joi.array().items(Joi.string().valid(...block_id)).required()
     })
     return schema.validate(data)
 }
