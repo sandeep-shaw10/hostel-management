@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from "axios";
 
@@ -21,7 +21,7 @@ const Rooms = (props) => {
   //DEALLOT
   function deallot(roll){
     const auth_header = { 'auth-token': props.state.token }
-    const url = 'http://127.0.0.1:8000'
+    const url = props.apiLink
 
     axios({ url: `${url}/api/allotment/remove/${roomId}/${roll}`, method: "GET", headers: auth_header })
       .then((res) => {
@@ -56,7 +56,7 @@ const Rooms = (props) => {
   //ALLOT
   function allotRoom(roll){
     const auth_header = { 'auth-token': props.state.token }
-    const url = 'http://127.0.0.1:8000'
+    const url = props.apiLink
 
     axios({ url: `${url}/api/allotment/${roomId}/${roll}`, method: "GET", headers: auth_header })
       .then((res) => {
@@ -81,17 +81,18 @@ const Rooms = (props) => {
 
       })
       .catch((err) => {
-        if(err.response.status === 400){
+        if(err.response && err.response.status === 400){
           localStorage.removeItem("state");
           navigate("/")
         }
+        console.log(err.response)
       });
   }
 
   //DEALLOT: END
   function endHostel(roll){
     const auth_header = { 'auth-token': props.state.token }
-    const url = 'http://127.0.0.1:8000'
+    const url = props.apiLink
 
     axios({ url: `${url}/api/allotment/${roll}/end`, method: "GET", headers: auth_header })
       .then((res) => {
@@ -116,7 +117,8 @@ const Rooms = (props) => {
 
       })
       .catch((err) => {
-        if(err.response.status === 400){
+        console.log(err)
+        if(err.response && err.response.status === 400){
           localStorage.removeItem("state");
           navigate("/")
         }
@@ -161,7 +163,6 @@ const Rooms = (props) => {
                     <th scope="col">Roll</th>
                     <th scope="col">Course</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>

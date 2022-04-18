@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios';
 
@@ -17,7 +17,7 @@ const Student = (props) => {
     function deleteStudent(roll){
         setDisable(true)
         const auth_header = { 'auth-token': props.state.token??null }
-        const url = 'http://127.0.0.1:8000'
+        const url = props.apiLink
     
         axios({ url: `${url}/api/student/delete/${roll}`, method: "GET", headers: auth_header })
           .then((res) => { 

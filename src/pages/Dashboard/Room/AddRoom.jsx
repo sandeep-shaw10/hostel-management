@@ -15,7 +15,7 @@ const AddRoom = (props) => {
         setDisable(true)
 
         const auth_header = { 'auth-token': props.state.token??null }
-        const url = 'http://127.0.0.1:8000'
+        const url = props.apiLink
         const req_body = { block: block, desc: desc, room_no: number }
 
         axios({ url: `${url}/api/room/add/${block}`, method: "POST", headers: auth_header, data: req_body })

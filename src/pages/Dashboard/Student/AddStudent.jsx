@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -22,7 +22,8 @@ const AddStudent = (props) => {
 
         console.log(name,roll,email,year,branch,course,sex)
         const auth_header = { 'auth-token': props.state.token }
-        const url = 'http://127.0.0.1:8000'
+        const url = props.apiLink
+        
         const req_body = {
             name: name,
             roll: roll,

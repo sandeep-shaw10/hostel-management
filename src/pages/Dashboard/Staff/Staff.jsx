@@ -11,7 +11,7 @@ const Staff = (props) => {
   function deleteStaff(id){
     setDisable(true)
     const auth_header = { 'auth-token': props.state.token??null }
-    const url = 'http://127.0.0.1:8000'
+    const url = props.apiLink
 
     axios({ url: `${url}/api/user/delete/${id}`, method: "GET", headers: auth_header })
       .then((res) => { 

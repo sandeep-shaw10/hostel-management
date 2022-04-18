@@ -27,6 +27,7 @@ import StudentDetail from './pages/Dashboard/Student/StudentDetail'
 function App() {
 
   const [state, setState] = useState()
+  const [apiLink, setApiLink] = useState('https://hostel-management-omega.vercel.app')
   
   useEffect(() => {
     const local =  JSON.parse(localStorage.getItem('state'))
@@ -45,39 +46,39 @@ function App() {
             <Routes>
               <Route exact path="/" element={<Home/>} />
 
-              <Route path="/login" element={<ProtectedRoute status='loggedOut' state={state} />} >
-                <Route index element={<Login state={state} setState={setState} />} />
+              <Route path="/login" element={<ProtectedRoute status='loggedOut' state={state} apiLink={apiLink} />} >
+                <Route index element={<Login state={state} apiLink={apiLink} setState={setState} />} />
               </Route>
 
-              <Route path="/dashboard" element={<ProtectedRoute status='loggedIn' state={state} />}>
-                <Route index element={<Dashboard state={state} />} />
+              <Route path="/dashboard" element={<ProtectedRoute status='loggedIn' state={state} apiLink={apiLink} />}>
+                <Route index element={<Dashboard state={state} apiLink={apiLink} />} />
 
                 <Route path="staff">
-                  <Route index element={ <Staff state={state} setState={setState}/> } />
-                  <Route path="add" element={ <AddStaff state={state} setState={setState} /> } />
+                  <Route index element={ <Staff state={state} apiLink={apiLink} setState={setState}/> } />
+                  <Route path="add" element={ <AddStaff state={state} apiLink={apiLink} setState={setState} /> } />
                 </Route >
 
 
                 <Route path="block">
-                  <Route index element={ <Block state={state} /> } />
-                  <Route path=":blockId" element={ <RoomBlock state={state} /> } />
+                  <Route index element={ <Block state={state} apiLink={apiLink} /> } />
+                  <Route path=":blockId" element={ <RoomBlock state={state} apiLink={apiLink} /> } />
                 </Route>
 
                 <Route path="student">
-                  <Route index element={ <Student state={state} setState={setState}/> } />
-                  <Route path="add" element={ <AddStudent state={state} setState={setState}/> } />
-                  <Route path=":studentRoll" element={ <StudentDetail state={state} setState={setState}/> } />
+                  <Route index element={ <Student state={state} apiLink={apiLink} setState={setState}/> } />
+                  <Route path="add" element={ <AddStudent state={state} apiLink={apiLink} setState={setState}/> } />
+                  <Route path=":studentRoll" element={ <StudentDetail state={state} apiLink={apiLink} setState={setState}/> } />
                 </Route>
 
                 <Route path="room">
-                  <Route index element={ <Rooms state={state} setState={setState}/> } />
-                  <Route path="add" element={ <AddRoom state={state} setState={setState}/> } />
-                  <Route path=":roomId" element={ <RoomDetail state={state} setState={setState}/>  } />
+                  <Route index element={ <Rooms state={state} apiLink={apiLink} setState={setState}/> } />
+                  <Route path="add" element={ <AddRoom state={state} apiLink={apiLink} setState={setState}/> } />
+                  <Route path=":roomId" element={ <RoomDetail state={state} apiLink={apiLink} setState={setState}/>  } />
                 </Route>
 
               </Route>
 
-              <Route path="/logout" element={<ProtectedRoute status='loggedIn' state={state} />}>
+              <Route path="/logout" element={<ProtectedRoute status='loggedIn' state={state} apiLink={apiLink} />}>
                 <Route index element={<Logout setState={setState}/>} />
               </Route>
 

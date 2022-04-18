@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -9,6 +9,7 @@ const AddStaff = (props) => {
     const [re_password, setRePassword] = useState()
     const [name, setName] = useState()
     const [role, setRole] = useState('staff')
+    const [block, setBlock] = useState()
     const [disable, setDisable] = useState(false)
     const navigate = useNavigate();
 
@@ -19,8 +20,8 @@ const AddStaff = (props) => {
         if(password !== re_password) return {"error": "Password Not Matching"}
 
         const auth_header = { 'auth-token': props.state.token??null }
-        const url = 'http://127.0.0.1:8000'
-        const req_body = { email: email, password: password, name: name, role: role }
+        const url = props.apiLink
+        const req_body = { email: email, password: password, name: name, role: role, block: block }
 
         axios({ url: `${url}/api/user/register`, method: "POST", headers: auth_header, data: req_body })
           .then((res) => {
@@ -29,7 +30,7 @@ const AddStaff = (props) => {
                 "role": role,
                 "name": name,
                 "email": email,
-                "block": [],
+                "block": block,
                 "__v": 0,
                 "password": '__uncached__',
                 "date": Date.now()
@@ -58,7 +59,8 @@ const AddStaff = (props) => {
         if(e.target.name === 'password') setPassword(e.target.value)
         if(e.target.name === 'name') setName(e.target.value) 
         if(e.target.name === 'role') setRole(e.target.value) 
-        if(e.target.name === 're-password') setRePassword(e.target.value) 
+        if(e.target.name === 're-password') setRePassword(e.target.value)
+        if(e.target.name === 'block') setBlock(e.target.value.replace(/ /g,'').split(',')) 
     }
 
     return(
@@ -90,9 +92,14 @@ const AddStaff = (props) => {
                                     onChange={ (e) => handleChange(e) }
                                 />
                             </div>
+                            <div className="form-group mb-2">
+                                <input name="block" type="text" className="form-control" placeholder="Block Permission: 1,2,3 ... " required
+                                    onChange={ (e) => handleChange(e) }
+                                />
+                            </div>
                             <select name="role" className="form-select" onChange={ (e) => handleChange(e)}>
                                 <option value="staff">Staff</option>
-                                <option value="admin">Admin</option>
+                                <option value="admin" disabled>Admin</option>
                             </select>
                             <button type="submit" className="btn btn-primary btn-sm m-2" disabled={disable}>
                                 { !disable && "Add"}

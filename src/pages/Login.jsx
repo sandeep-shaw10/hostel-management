@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -15,7 +15,7 @@ const Login = (props) => {
 
         const req_header = { 'Content-Type': 'application/json' }
         const req_body = { email: email, password: password }
-        const url = 'http://127.0.0.1:8000'
+        const url = props.apiLink
 
         axios({ url: `${url}/api/user/login`, method: "POST", headers: req_header, data: req_body })
           .then((res) => { 
