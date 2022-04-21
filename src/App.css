@@ -1,14 +1,14 @@
-body{
+body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-.center-head{
+.center-head {
   display: flex;
   justify-content: center;
 }
 
-.content{
+.content {
   padding: 24px 24px 80px 24px;
 }
