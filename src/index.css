@@ -8,6 +8,8 @@ body {
   background-color: rgba(1, 0, 0, 0.63);
 
   background-image: url(../public/images/landing.png);
+  background-size: cover;
+  overflow-y: scroll;
 }
 
 code {
