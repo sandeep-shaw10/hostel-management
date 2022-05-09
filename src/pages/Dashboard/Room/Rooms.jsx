@@ -66,8 +66,8 @@ const Rooms = (props) => {
                           }
                         </td>
                         <td>
-                          <button disabled={disable} onClick={() => deleteRoom(x._id)} data-bs-toggle="tooltip" data-bs-placement="right" title="Delete" className="btn btn-sm btn-outline-danger mx-1">🗑️</button>
-                          <button disabled={disable} className="btn btn-sm btn-outline-primary mx-1 " data-bs-toggle="tooltip" data-bs-placement="right" title="Update">⚙️</button>
+                          <button disabled={disable} onClick={() => deleteRoom(x._id)} data-bs-toggle="tooltip" data-bs-placement="right" title="Delete" className="btn btn-sm btn-danger mx-1">🗑️</button>
+                          <button disabled={disable} className="btn btn-sm btn-primary mx-1 " data-bs-toggle="tooltip" data-bs-placement="right" title="Update">⚙️</button>
                         </td>
                     </tr>)
                   }

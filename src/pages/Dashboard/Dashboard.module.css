@@ -27,21 +27,28 @@
 .grid_button {
   white-space: nowrap;
   text-align: center;
-  font-family: Google Sans;
+  color: #002931;
   font-style: normal;
   font-weight: bold;
   font-size: 1.5rem;
-  color: rgba(219, 200, 200, 1);
-
   margin: auto;
   text-decoration: none;
 }
+
 .welcome {
   white-space: nowrap;
   text-align: center;
   font-family: Google Sans;
   font-style: normal;
-  font-weight: bold;
-  font-size: 3rem;
+  font-weight: 400;
+  font-size: 2.5rem;
   color: rgba(255, 255, 255, 1);
+  text-shadow: 2.5px 2.5px 10px black;
+}
+
+@media screen and (max-width: 560px) {
+  .welcome {
+    font-size: 7vw;
+    padding-top: 20px;
+  }
 }

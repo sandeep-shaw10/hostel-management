@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import navbarcss from "./Navbar.module.css";
 
+
 const Navbar = (props) => {
   return (
     <>
@@ -11,7 +12,7 @@ const Navbar = (props) => {
             className={[navbarcss.navbar_text, "navbar-brand"].join(" ")}
             to="/"
           >
-            HOSTEL MANAGEMENT SYSTEM
+            
           </Link>
           <div className="navbar-nav">
             {props.state && props.state.token && (
@@ -29,7 +30,7 @@ const Navbar = (props) => {
                 className={[navbarcss.navbar_buttons, "nav-link"].join(" ")}
                 to="/login"
               >
-                LOGIN
+                Login
               </Link>
             )}
           </div>

@@ -43,8 +43,8 @@ const Login = (props) => {
   return (
     <>
       <div className="row text-white ">
-        <div className="  col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
-          <h1 className="pb-4">WELCOME</h1>
+        <div className="bg-light rounded shadow-lg col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
+          <h1 className="pb-4 text-primary">WELCOME</h1>
 
           <div className="px-2">
             <form onSubmit={handleSubmit} className="justify-content-center">
@@ -64,7 +64,9 @@ const Login = (props) => {
                 <input
                   name="password"
                   type="text"
-                  className="form-control"
+                  className={[login_classes.form_input, "form-control "].join(
+                    " "
+                  )}
                   placeholder="Password"
                   required
                   onChange={(e) => handleChange(e)}

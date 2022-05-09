@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgba(1, 0, 0, 0.63);
+  background-color: #00f9ff7a;
 
   background-image: url(../public/images/landing.png);
   background-size: cover;
@@ -15,4 +15,14 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+a{
+  color: #dc3545;
+  font-weight: bold;
+}
+
+
+footer{
+  opacity: 0.75;
 }
