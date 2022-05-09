@@ -1,0 +1,15 @@
+.form_input {
+  background: url(../../public/images/input.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+  height: 3rem;
+  color: antiquewhite;
+}
+.form_input:focus {
+  background: url(../../public/images/input.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  outline: none;
+  height: 3rem;
+}

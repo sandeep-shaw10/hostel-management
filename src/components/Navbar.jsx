@@ -1,28 +1,42 @@
-import React from 'react';
-import { Link } from 'react-router-dom'
-
+import React from "react";
+import { Link } from "react-router-dom";
+import navbarcss from "./Navbar.module.css";
 
 const Navbar = (props) => {
+  return (
+    <>
+      <nav className={[navbarcss.navbar, "navbar navbar-expand-sm "].join(" ")}>
+        <div className="container-fluid px-4 py-2">
+          <Link
+            className={[navbarcss.navbar_text, "navbar-brand"].join(" ")}
+            to="/"
+          >
+            HOSTEL MANAGEMENT SYSTEM
+          </Link>
+          <div className="navbar-nav">
+            {props.state && props.state.token && (
+              <>
+                <Link className="nav-link" to="/dashboard">
+                  Dashboard
+                </Link>
+                <Link className="nav-link" to="/logout">
+                  Logout
+                </Link>
+              </>
+            )}
+            {!props.state && (
+              <Link
+                className={[navbarcss.navbar_buttons, "nav-link"].join(" ")}
+                to="/login"
+              >
+                LOGIN
+              </Link>
+            )}
+          </div>
+        </div>
+      </nav>
+    </>
+  );
+};
 
-    return(
-        <>
-            <nav className="navbar navbar-expand-sm navbar-light bg-info">
-                <div className="container-fluid px-4 py-2">
-                    <Link className="navbar-brand" to="/">Navbar</Link>
-                    <div className="navbar-nav">
-                        <Link className="nav-link" to="/">Home</Link>
-                        {props.state && props.state.token &&
-                            <>
-                                <Link className="nav-link" to="/dashboard">Dashboard</Link>
-                                <Link className="nav-link" to="/logout">Logout</Link>
-                            </>
-                        }
-                        {!props.state && <Link className="nav-link" to="/login">Login</Link>}
-                    </div>
-                </div>
-            </nav>
-        </>
-    )
-}
-
-export default Navbar
+export default Navbar;

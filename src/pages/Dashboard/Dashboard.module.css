@@ -1,0 +1,47 @@
+.button {
+  background: url("../../../public/images/block.png");
+  background-size: cover;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 5.5px;
+  padding-bottom: 5.5px;
+  white-space: nowrap;
+  text-align: center;
+  font-family: Google Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: rgba(167, 173, 87, 1);
+  margin: auto;
+  text-decoration: none;
+}
+.grid_container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+}
+.grid_item {
+  padding: 20px;
+  text-align: center;
+}
+.grid_button {
+  white-space: nowrap;
+  text-align: center;
+  font-family: Google Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: rgba(219, 200, 200, 1);
+
+  margin: auto;
+  text-decoration: none;
+}
+.welcome {
+  white-space: nowrap;
+  text-align: center;
+  font-family: Google Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 1);
+}
